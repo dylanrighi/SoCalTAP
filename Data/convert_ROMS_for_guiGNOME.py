@@ -22,12 +22,16 @@ out_dir = 'roms_gnome'
 out_dir = os.path.join('gnome_ucla','surface')
 if not os.path.exists(out_dir):
     os.mkdir(out_dir)
+if not os.path.exists(out_dir):
+    os.mkdir(out_dir)
     
-for f in flist[0:2]:
+for f in flist:
     print f
     roms.update(os.path.join(in_dir,f))
     roms.get_dimensions(var_map,get_xy=False)
     roms.get_data(var_map)
+
+    roms.dlx = 1
 
     roms.write_nc(os.path.join(out_dir,f))
     

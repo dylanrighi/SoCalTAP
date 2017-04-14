@@ -21,7 +21,7 @@ if not os.path.exists(out_dir):
     os.mkdir(out_dir)
     
 t_units = 'hours since 2004-01-01 00:00:00'
-for f in flist[0:2]:
+for f in flist:
     print f
     wrf.update(os.path.join(in_dir,f))
     
