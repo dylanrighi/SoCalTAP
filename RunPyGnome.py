@@ -64,7 +64,7 @@ for ff in os.listdir(setup.Data_Dir):
     if ff.endswith("filelist.txt"):
         fn = ff
 # fn = os.path.join(setup.Data_Dir,'SoCal_filelist.txt')
-f = file(fn)
+f = file(os.path.join(setup.Data_Dir,fn))
 flist = []
 for line in f:
     name = os.path.join(setup.Data_Dir, line)
@@ -171,7 +171,7 @@ for Season in setup.StartTimeFiles:
         print 'adding a CurrentMover (Trapeziod/RK4):'
         g_curr = GridCurrent.from_netCDF(filename=file_list,
                                        dataset=ds_c,
-                                       grid_topology={'node_lon':'lon','node_lat':'lat'})
+                                       grid_topology={'node_lon':'lonc','node_lat':'latc'})
         c_mover = PyGridCurrentMover(current=g_curr, default_num_method='Trapezoid')
         model.movers += c_mover
 
@@ -181,7 +181,7 @@ for Season in setup.StartTimeFiles:
         print 'adding a WindMover (Euler):'
         g_wind = GridWind.from_netCDF(filename=file_list_w,
                                     dataset=ds_w,
-                                    grid_topology={'node_lon':'lon','node_lat':'lat'})
+                                    grid_topology={'node_lon':'lonc','node_lat':'latc'})
         w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
         model.movers += w_mover
         
