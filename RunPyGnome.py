@@ -18,7 +18,7 @@ from gnome.map import MapFromBNA
 
 from gnome.movers.py_current_movers import PyGridCurrentMover
 from gnome.movers.py_wind_movers import PyWindMover
-from gnome.movers.random_movers import IceAwareRandomMover
+from gnome.movers.random_movers import RandomMover
 from gnome.environment import IceAwareCurrent, IceAwareWind
 
 import gc
@@ -42,7 +42,7 @@ def make_model(base_dir='.'):
     model = Model(start_time=start_time,
                   duration=timedelta(hours=96),
                   time_step=120*60)
-    mapfile = get_datafile(os.path.join(base_dir, 'arctic_coast3.bna'))
+    mapfile = get_datafile(os.path.join(base_dir, setup.MapFileName))
     print mapfile
     print 'adding the map'
     model.map = MapFromBNA(mapfile, refloat_halflife=0.0)  # seconds
@@ -60,7 +60,10 @@ def make_model(base_dir='.'):
 # model = make_model(setup.RootDir)
 
 # do some finagling with the start times in the data files
-fn = os.path.join(setup.Data_Dir,'arctic_filelist_cat.txt')
+for ff in os.listdir(setup.Data_Dir)
+    if ff.endswith("filelist.txt"):
+        fn = ff
+# fn = os.path.join(setup.Data_Dir,'SoCal_filelist.txt')
 f = file(fn)
 flist = []
 for line in f:
@@ -134,6 +137,24 @@ for Season in setup.StartTimeFiles:
         print 'number of ROMS files :: ', len(file_list)
         print file_list
         
+        # set up the model with the correct forcing files for this time/duration
+        file_list_w = []
+        i = 0
+        for i in range(0, len(Time_Map) - 1):
+            curr_t, curr_fn = Time_Map[ i ]
+            next_t, next_fn = Time_Map[ i+1 ]
+            if next_t > start_time:
+                file_list_w.append( curr_fn )
+                if next_t > end_time:
+                    break
+        file_list_w.append( next_fn )    # pad the list with next file to cover special case of last file. 
+                                        #   awkward. fix later
+        print 'number of wind files :: ', len(file_list_w)
+        print file_list_w
+
+
+
+
         # for i in range(0, 1000 ):
         #     curr_t, curr_fn = Time_Map[i]
         #     file_list.append( curr_fn )
@@ -144,25 +165,28 @@ for Season in setup.StartTimeFiles:
         model.duration = run_time
         # model.movers.clear()
 
-        print 'creating MFDataset'
-        ds = nc4.MFDataset(file_list)
+        print 'creating curr MFDataset'
+        ds_c = nc4.MFDataset(file_list)
         
-        print 'adding an Ice CurrentMover (Trapeziod/RK4):'
-        ice_aware_curr = IceAwareCurrent.from_netCDF(filename=file_list,
-                                                     dataset=ds,
-                                                     grid_topology={'node_lon':'lon','node_lat':'lat'})
-        i_c_mover = PyGridCurrentMover(current=ice_aware_curr, default_num_method='Trapezoid')
-        model.movers += i_c_mover
+        print 'adding a CurrentMover (Trapeziod/RK4):'
+        g_curr = GridCurrent.from_netCDF(filename=file_list,
+                                       dataset=ds_c,
+                                       grid_topology={'node_lon':'lon','node_lat':'lat'})
+        c_mover = PyGridCurrentMover(current=g_curr, default_num_method='Trapezoid')
+        model.movers += c_mover
 
-        print 'adding an Ice WindMover (Euler):'
-        ice_aware_wind = IceAwareWind.from_netCDF(filename=file_list,
-                                                  dataset=ds,
-                                                  grid = ice_aware_curr.grid)
-        i_w_mover = PyWindMover(wind = ice_aware_wind, default_num_method='Euler')
-        model.movers += i_w_mover
+        print 'creating wind MFDataset'
+        ds_w = nc4.MFDataset(file_list_w)
+
+        print 'adding a WindMover (Euler):'
+        g_wind = GridWind.from_netCDF(filename=file_list_w,
+                                    dataset=ds_w,
+                                    grid_topology={'node_lon':'lon','node_lat':'lat'})
+        w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
+        model.movers += w_mover
         
-        print 'adding an Ice RandomMover:'
-        model.movers += IceAwareRandomMover(ice_conc_var = ice_aware_wind.ice_conc_var, diffusion_coef=50000)
+        print 'adding a RandomMover:'
+        model.movers += RandomMover(diffusion_coef=50000)
 
 
 

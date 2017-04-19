@@ -48,15 +48,16 @@ TimeSeries = None
 #                 datetime.datetime(1986, 3, 21, 22)
 #                 )
 # All ROMS data files (on Gonzo)
-DataStartEnd = (datetime.datetime(1985, 1, 1, 14),
-                datetime.datetime(2006, 5, 29, 6)
+DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
+                datetime.datetime(20013, 12, 31, 23)
                 )
 
 
 DataGaps = ( )
 # Data_Dir = 'C:\Users\dylan.righi\Science\ArcticTAP\data_gnome\ROMS_h2ouv'   # Laptop
 # Data_Dir = '/data/dylan/ArcticTAP/data_gnome/ROMS_h2ouv/'  # Gonzo
-Data_Dir = '/data/dylan/ArcticTAP/data_gnome/ROMS_cat/'  # Gonzo/V_TAP cat dir
+Data_Dir = '/data/dylan/SoCalTAP/Data/gnome_ucla/surface/'  # Gonzo/V_TAP cat dir
+Data_DirW = '/data/dylan/SoCalTAP/Data/gnome_ucla/wind/'  # Gonzo/V_TAP cat dir
 
 
 # specification for how you want seasons to be defined:
@@ -74,8 +75,8 @@ Data_Dir = '/data/dylan/ArcticTAP/data_gnome/ROMS_cat/'  # Gonzo/V_TAP cat dir
 #          ["Summer",[4, 5, 6, 7, 8, 9, 10]],]
 Seasons = [
           ["AllYear", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
-          ["Ice", [12, 1, 2, 3, 4, 5]],
-          ["NoIce",  [6, 7, 8, 9, 10, 11 ]], 
+          #["Ice", [12, 1, 2, 3, 4, 5]],
+          #["NoIce",  [6, 7, 8, 9, 10, 11 ]], 
           # ["Winter", [12, 1, 2, 3, 4, 5]],
           # ["Summer",  [6, 7, 8, 9, 10, 11 ]], 
           # ["Spring",  [3, 4, 5 ]], 
@@ -103,9 +104,7 @@ RunFiles = []
 
 
 # # Length of release in hours  (0 for instantaneous)
-# ReleaseLength = 30*24   # platforms
-ReleaseLength = 6       # vessels
-# ReleaseLength = 48      # pipelines
+ReleaseLength = 14*24   # platforms
 
 
 # name of the GNOME SAV file you want to use
@@ -127,12 +126,12 @@ OilWeatheringType = None
 
 class Grid:
 	pass
-Grid.min_lat = 65.0 # decimal degrees
-Grid.max_lat = 80.0
-Grid.dlat = 0.15       # makes 17km tall receptor cells I
-Grid.min_long = 170.0
-Grid.max_long = 230.0
-Grid.dlong = 0.5       # 17km wide cells at 70N, 15 at 75N, 23 at 65N
+Grid.min_lat = 30.0 # decimal degrees
+Grid.max_lat = 36.0
+Grid.dlat = 0.09       # makes 10km tall receptor cells I
+Grid.min_long = 237.0   # -123
+Grid.max_long = 244.0   # -116 
+Grid.dlong = 0.1       # ~9km at 36N, ~10 at 30N
 
 # Grid.num_lat = 45
 # Grid.num_long = 90
@@ -145,14 +144,11 @@ TrajectoriesPath = "Trajectories_n" + str(NumLEs) # relative to RootDir
 #TrajectoriesRootname = "FlStr_Traj"
 
 
-# CubesPath = "CubesPlat_n" + str(NumLEs)
-CubesPath = "CubesVess_n" + str(NumLEs)
-# CubesPath = "CubesPipe_n" + str(NumLEs)
-
-CubesRootNames = ["Arc_" for i in StartTimeFiles] # built to match the start time files
+CubesPath = "Cubes_n" + str(NumLEs)
+CubesRootNames = ["SoCal_" for i in StartTimeFiles] # built to match the start time files
 
 # CubeStartSitesFilename = os.path.join(RootDir, "Arctic_platforms_all2.txt")
-CubeStartSitesFilename = os.path.join(RootDir, "Arctic_vessels.txt")
+CubeStartSitesFilename = os.path.join(RootDir, "SB_sites_all.txt")
 # CubeStartSitesFilename = os.path.join(RootDir, "Arctic_pipelines.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
 
@@ -172,8 +168,8 @@ CubeStartFilter = []   # January
 MapName = "Arctic TAP"
 MapFileName, MapFileType = ("arctic_coast3.bna", "BNA")
 
-days = [1, 3, 5, 7, 10, 15, 20, 30, 50, 70, 90, 120, 180]
-# days = [1, 3, 5, 7, 10, 15, 20, 30]
+# days = [1, 3, 5, 7, 10, 15, 20, 30, 50, 70, 90, 120, 180]
+days = [1, 2, 3, 5, 7, 10, 15, 20, 24]
 # days = [1, 2, 3]
 OutputTimes = [24*i for i in days] # output times in hours(calculated from days
 
@@ -186,23 +182,19 @@ OutputTimes = [24*i for i in days] # output times in hours(calculated from days
 #                      ]
 
 OutputUserStrings = ["1 day",
+                     "2 days",
                      "3 days",
                      "5 days",
                      "7 days",
                      "10 days",
                      "15 days",
                      "20 days",
-                     "30 days",
-                     "60 days",
-                     "70 days",
-                     "90 days",
-                     "120 days",
-                     "180 days",
+                     "24 days",
                      ]
 
 # this is calculated from the OutputTimes
 # TrajectoryRunLength = OutputTimes[-1]
-TrajectoryRunLength = 24 * 180
+TrajectoryRunLength = 24 * 24
 
 PresetLOCS = ["5 barrels", "10 barrels", "20 barrels"]
 PresetSpillAmounts = ["1000 barrels", "100 barrels"]
