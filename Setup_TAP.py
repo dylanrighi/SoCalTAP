@@ -49,7 +49,7 @@ TimeSeries = None
 #                 )
 # All ROMS data files (on Gonzo)
 DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
-                datetime.datetime(20013, 12, 31, 23)
+                datetime.datetime(2013, 12, 31, 23)
                 )
 
 

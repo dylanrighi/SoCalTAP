@@ -16,10 +16,10 @@ from gnome.model import Model
 from gnome.utilities.remote_data import get_datafile
 from gnome.map import MapFromBNA
 
-from gnome.movers.py_current_movers import PyGridCurrentMover
+from gnome.movers.py_current_movers import PyCurrentMover
 from gnome.movers.py_wind_movers import PyWindMover
 from gnome.movers.random_movers import RandomMover
-from gnome.environment import IceAwareCurrent, IceAwareWind
+from gnome.environment import GridCurrent, GridWind
 
 import gc
 
@@ -60,7 +60,7 @@ def make_model(base_dir='.'):
 # model = make_model(setup.RootDir)
 
 # do some finagling with the start times in the data files
-for ff in os.listdir(setup.Data_Dir)
+for ff in os.listdir(setup.Data_Dir):
     if ff.endswith("filelist.txt"):
         fn = ff
 # fn = os.path.join(setup.Data_Dir,'SoCal_filelist.txt')
