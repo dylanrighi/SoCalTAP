@@ -59,6 +59,7 @@ def make_model(base_dir='.'):
 # Instantiate a generic model
 # model = make_model(setup.RootDir)
 
+### CURRENT
 # do some finagling with the start times in the data files
 for ff in os.listdir(setup.Data_Dir):
     if ff.endswith("filelist.txt"):
@@ -76,6 +77,27 @@ for fn in flist:
     t = d['time']
     file_start_time = nc4.num2date(t[0], units=t.units)
     Time_Map.append( (file_start_time, fn) )
+
+### WIND
+# do some finagling with the start times in the data files
+for ff in os.listdir(setup.Data_DirW):
+    if ff.endswith("filelist.txt"):
+        fn = ff
+# fn = os.path.join(setup.Data_Dir,'SoCal_filelist.txt')
+f = file(os.path.join(setup.Data_DirW,fn))
+flist = []
+for line in f:
+    name = os.path.join(setup.Data_DirW, line)
+    flist.append(name[:-1])   # Gonzo cat version
+    # flist.append(name[:-1])   # laptop current version
+Time_Map_W = []
+for fn in flist:
+    d = nc4.Dataset(fn)
+    t = d['time']
+    file_start_time = nc4.num2date(t[0], units=t.units)
+    Time_Map_W.append( (file_start_time, fn) )
+
+
 
 
 # load up the start positions
@@ -140,9 +162,9 @@ for Season in setup.StartTimeFiles:
         # set up the model with the correct forcing files for this time/duration
         file_list_w = []
         i = 0
-        for i in range(0, len(Time_Map) - 1):
-            curr_t, curr_fn = Time_Map[ i ]
-            next_t, next_fn = Time_Map[ i+1 ]
+        for i in range(0, len(Time_Map_W) - 1):
+            curr_t, curr_fn = Time_Map_W[ i ]
+            next_t, next_fn = Time_Map_W[ i+1 ]
             if next_t > start_time:
                 file_list_w.append( curr_fn )
                 if next_t > end_time:
