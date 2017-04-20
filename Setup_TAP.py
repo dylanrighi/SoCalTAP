@@ -193,6 +193,8 @@ OutputUserStrings = ["1 day",
 # this is calculated from the OutputTimes
 # TrajectoryRunLength = OutputTimes[-1]
 TrajectoryRunLength = 14 * 24
+out_delta = 1         # output time interval, in hours
+time_step = 5*60      # model time-step, in seconds
 
 PresetLOCS = ["5 barrels", "10 barrels", "20 barrels"]
 PresetSpillAmounts = ["1000 barrels", "100 barrels"]

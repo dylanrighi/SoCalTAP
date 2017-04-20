@@ -41,7 +41,7 @@ def make_model(base_dir='.'):
     # start with generic times...this will be changed when model is run
     model = Model(start_time=start_time,
                   duration=timedelta(hours=96),
-                  time_step=120*60)
+                  time_step=setup.time_step)
     mapfile = get_datafile(os.path.join(base_dir, setup.MapFileName))
     print mapfile
     print 'adding the map'
@@ -236,7 +236,7 @@ for Season in setup.StartTimeFiles:
             renderer = Renderer(os.path.join(setup.RootDir, setup.MapFileName),
                                 image_dir,
                                 image_size=(800, 600),
-                                output_timestep=timedelta(hours=12))
+                                output_timestep=timedelta(hours=setup.out_delta))
             renderer.graticule.set_DMS(True)
             #renderer.viewport = ((-120.6666, 33.75),(-119.25, 34.5)) 
             make_dir(image_dir)
@@ -253,7 +253,7 @@ for Season in setup.StartTimeFiles:
             ## clear the old outputters
             model.outputters.clear()
 #            model.outputters += renderer
-            model.outputters += NetCDFOutput(netcdf_output_file,output_timestep=timedelta(hours=12))
+            model.outputters += NetCDFOutput(netcdf_output_file,output_timestep=timedelta(hours=setup.out_delta))
 
             # clear out the old spills:
             model.spills.clear()
