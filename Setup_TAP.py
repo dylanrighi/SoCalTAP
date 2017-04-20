@@ -169,7 +169,7 @@ MapName = "Arctic TAP"
 MapFileName, MapFileType = ("arctic_coast3.bna", "BNA")
 
 # days = [1, 3, 5, 7, 10, 15, 20, 30, 50, 70, 90, 120, 180]
-days = [1, 2, 3, 5, 7, 10, 15, 20, 24]
+days = [1, 2, 3, 5, 7, 10, 14]
 # days = [1, 2, 3]
 OutputTimes = [24*i for i in days] # output times in hours(calculated from days
 
@@ -187,14 +187,12 @@ OutputUserStrings = ["1 day",
                      "5 days",
                      "7 days",
                      "10 days",
-                     "15 days",
-                     "20 days",
-                     "24 days",
+                     "14 days",
                      ]
 
 # this is calculated from the OutputTimes
 # TrajectoryRunLength = OutputTimes[-1]
-TrajectoryRunLength = 24 * 24
+TrajectoryRunLength = 14 * 24
 
 PresetLOCS = ["5 barrels", "10 barrels", "20 barrels"]
 PresetSpillAmounts = ["1000 barrels", "100 barrels"]
