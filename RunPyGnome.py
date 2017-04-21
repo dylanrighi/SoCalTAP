@@ -259,13 +259,13 @@ for Season in setup.StartTimeFiles:
             model.spills.clear()
             model.spills+=spill
 
-            # model.full_run(rewind=True)
-            for i, step in enumerate(model):
-                 print i, step
-                 print
-                 for sc in model.spills.items():
-                     print "status_codes:", sc['status_codes']
-                     print "positions:", sc['positions']
-                     print "lw positions:", sc['last_water_positions']
+            model.full_run(rewind=True)
+            # for i, step in enumerate(model):
+            #      print i, step
+            #      print
+            #      for sc in model.spills.items():
+            #          print "status_codes:", sc['status_codes']
+            #          print "positions:", sc['positions']
+            #          print "lw positions:", sc['last_water_positions']
 
 
