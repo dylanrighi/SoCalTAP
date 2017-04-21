@@ -148,7 +148,7 @@ CubesPath = "Cubes_n" + str(NumLEs)
 CubesRootNames = ["SoCal_" for i in StartTimeFiles] # built to match the start time files
 
 # CubeStartSitesFilename = os.path.join(RootDir, "Arctic_platforms_all2.txt")
-CubeStartSitesFilename = os.path.join(RootDir, "SB_sites_all.txt")
+CubeStartSitesFilename = os.path.join(RootDir, "SB_sites_all_edit.txt")
 # CubeStartSitesFilename = os.path.join(RootDir, "Arctic_pipelines.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
 
