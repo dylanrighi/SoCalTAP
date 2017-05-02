@@ -39,25 +39,23 @@ CubeDataType = 'float32'
 TimeSeries = None
 
 # time span of your data set
-# current data files on my laptop...change for Gonzo runs
-# DataStartEnd = (datetime.datetime(1985, 1, 1, 14),
-#                datetime.datetime(1985, 5, 10, 10) 
-#                )
-# first 100 ROMS data files
-# DataStartEnd = (datetime.datetime(1985, 1, 1, 14),
-#                 datetime.datetime(1986, 3, 21, 22)
-#                 )
-# All ROMS data files (on Gonzo)
+# Test ROMS data files (on laptop)
 DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
-                datetime.datetime(2013, 12, 31, 23)
+                datetime.datetime(2004, 2, 28, 23)
                 )
+
+# All ROMS data files (on Gonzo)
+# DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
+                # datetime.datetime(2013, 12, 31, 23)
+                # )
 
 
 DataGaps = ( )
-# Data_Dir = 'C:\Users\dylan.righi\Science\ArcticTAP\data_gnome\ROMS_h2ouv'   # Laptop
-# Data_Dir = '/data/dylan/ArcticTAP/data_gnome/ROMS_h2ouv/'  # Gonzo
-Data_Dir = '/data/dylan/SoCalTAP/Data/gnome_ucla/surface/'  # Gonzo/V_TAP cat dir
-Data_DirW = '/data/dylan/SoCalTAP/Data/gnome_ucla/wind/'  # Gonzo/V_TAP cat dir
+Data_Dir = 'C:\Users\dylan.righi\Science\SoCalTAP\DATA\gnome_ucla\surface'   # Laptop
+Data_DirW = 'C:\Users\dylan.righi\Science\SoCalTAP\DATA\gnome_ucla\wind'   # Laptop
+
+# Data_Dir = '/data/dylan/SoCalTAP/Data/gnome_ucla/surface/'  # Gonzo/V_TAP cat dir
+# Data_DirW = '/data/dylan/SoCalTAP/Data/gnome_ucla/wind/'  # Gonzo/V_TAP cat dir
 
 
 # specification for how you want seasons to be defined:
@@ -165,8 +163,8 @@ CubeStartSites = [x for x in CubeStartSites if x]
 
 CubeStartFilter = []   # January
 
-MapName = "Arctic TAP"
-MapFileName, MapFileType = ("arctic_coast3.bna", "BNA")
+MapName = "SoCal TAP"
+MapFileName, MapFileType = (os.path.join('Data','SoCalcoast_big.bna'), "BNA")
 
 # days = [1, 3, 5, 7, 10, 15, 20, 30, 50, 70, 90, 120, 180]
 days = [1, 2, 3, 5, 7, 10, 14]
