@@ -51,11 +51,11 @@ DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
 
 
 DataGaps = ( )
-Data_Dir = 'C:\Users\dylan.righi\Science\SoCalTAP\DATA\gnome_ucla\surface'   # Laptop
-Data_DirW = 'C:\Users\dylan.righi\Science\SoCalTAP\DATA\gnome_ucla\wind'   # Laptop
+# Data_Dir = 'C:\Users\dylan.righi\Science\SoCalTAP\DATA\gnome_ucla\surface'   # Laptop
+# Data_DirW = 'C:\Users\dylan.righi\Science\SoCalTAP\DATA\gnome_ucla\wind'   # Laptop
 
-# Data_Dir = '/data/dylan/SoCalTAP/Data/gnome_ucla/surface/'  # Gonzo/V_TAP cat dir
-# Data_DirW = '/data/dylan/SoCalTAP/Data/gnome_ucla/wind/'  # Gonzo/V_TAP cat dir
+Data_Dir = '/data/dylan/SoCalTAP/Data/gnome_ucla/surface/'  # Gonzo/V_TAP cat dir
+Data_DirW = '/data/dylan/SoCalTAP/Data/gnome_ucla/wind/'  # Gonzo/V_TAP cat dir
 
 
 # specification for how you want seasons to be defined:
