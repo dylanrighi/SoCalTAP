@@ -39,9 +39,8 @@ def make_model(base_dir='.'):
     print base_dir
     start_time = datetime(1985, 1, 1, 13, 31)
     # start with generic times...this will be changed when model is run
-    model = Model(start_time=start_time,
-                  duration=timedelta(hours=96),
-                  time_step=setup.time_step)
+    model = Model(start_time=start_time,time_step=setup.time_step)
+
     mapfile = get_datafile(os.path.join(base_dir, setup.MapFileName))
     print mapfile
     print 'adding the map'
@@ -49,22 +48,12 @@ def make_model(base_dir='.'):
 
     return model
 
-# ## load up our run script
-# sys.path.append(setup.RootDir)
-# script = importlib.import_module(setup.PyGnome_script)
-# print script
-# print dir(script)
-# # model = script.make_model(setup.RootDir)
-
-# Instantiate a generic model
-# model = make_model(setup.RootDir)
-
 ### CURRENT
 # do some finagling with the start times in the data files
 for ff in os.listdir(setup.Data_Dir):
     if ff.endswith("filelist.txt"):
         fn = ff
-# fn = os.path.join(setup.Data_Dir,'SoCal_filelist.txt')
+
 f = file(os.path.join(setup.Data_Dir,fn))
 flist = []
 for line in f:
@@ -175,17 +164,10 @@ for Season in setup.StartTimeFiles:
         print file_list_w
 
 
-
-
-        # for i in range(0, 1000 ):
-        #     curr_t, curr_fn = Time_Map[i]
-        #     file_list.append( curr_fn )
-
-
         # set up model for this start_time/duration, adding required forcing files
         model = make_model(setup.RootDir)
         model.duration = run_time
-        # model.movers.clear()
+        model.movers.clear()
 
         print 'creating curr MFDataset'
         ds_c = nc4.MFDataset(file_list)
@@ -224,12 +206,18 @@ for Season in setup.StartTimeFiles:
             print "At start location:",   start_position
 
             ## set the spill to the location
+            # spill = point_line_release_spill(num_elements=setup.NumLEs,
+            #                                  start_position=( start_position[0], start_position[1], 0.0 ),
+            #                                  end_position=( start_position[0]+0.4, start_position[1]+0.2, 0.0 ),
+            #                                  release_time=start_time,
+            #                                  end_release_time=start_time+release_duration
+            #                                  )
             spill = point_line_release_spill(num_elements=setup.NumLEs,
                                              start_position=( start_position[0], start_position[1], 0.0 ),
-                                             end_position=( start_position[0]+0.4, start_position[1]+0.2, 0.0 ),
                                              release_time=start_time,
                                              end_release_time=start_time+release_duration
                                              )
+
 
             # set up the renderer location
             image_dir = os.path.join(setup.RootDir, 'Images',SeasonName, 'images_pos_%03i-time_%03i'%(pos_idx+1, time_idx))
@@ -252,7 +240,7 @@ for Season in setup.StartTimeFiles:
 
             ## clear the old outputters
             model.outputters.clear()
-#            model.outputters += renderer
+            # model.outputters += renderer
             model.outputters += NetCDFOutput(netcdf_output_file,output_timestep=timedelta(hours=setup.out_delta))
 
             # clear out the old spills:
