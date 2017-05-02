@@ -57,6 +57,12 @@ DataGaps = ( )
 Data_Dir = '/data/dylan/SoCalTAP/Data/gnome_ucla/surface/'  # Gonzo/V_TAP cat dir
 Data_DirW = '/data/dylan/SoCalTAP/Data/gnome_ucla/wind/'  # Gonzo/V_TAP cat dir
 
+CurrCatFile = "surf_filelist_gn.txt"
+WindCatFile = "wind_filelist_gn.txt"
+
+CurrTopoFile = "Topology_1.3.10.DAT"
+WindTopoFile = "wrf_topo_1.3.10.DAT"
+
 
 # specification for how you want seasons to be defined:
 #  a list of lists:

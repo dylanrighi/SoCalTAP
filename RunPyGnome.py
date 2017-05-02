@@ -16,11 +16,11 @@ from gnome.model import Model
 from gnome.utilities.remote_data import get_datafile
 from gnome.map import MapFromBNA
 
-from gnome.movers.py_current_movers import PyCurrentMover
-from gnome.movers.py_wind_movers import PyWindMover
+# from gnome.movers.py_current_movers import PyCurrentMover
+# from gnome.movers.py_wind_movers import PyWindMover
 from gnome.movers.random_movers import RandomMover
 from gnome.environment import GridCurrent, GridWind
-
+from gnome.movers import GridCurrentMover, GridWindMover
 import gc
 
 #from batch_gnome import batch_gnome
@@ -133,35 +133,35 @@ for Season in setup.StartTimeFiles:
         end_time = start_time + run_time
         print start_time, end_time  
 
-        # set up the model with the correct forcing files for this time/duration
-        file_list = []
-        i = 0
-        for i in range(0, len(Time_Map) - 1):
-            curr_t, curr_fn = Time_Map[ i ]
-            next_t, next_fn = Time_Map[ i+1 ]
-            if next_t > start_time:
-                file_list.append( curr_fn )
-                if next_t > end_time:
-                    break
-        file_list.append( next_fn )    # pad the list with next file to cover special case of last file. 
-                                        #   awkward. fix later
-        print 'number of ROMS files :: ', len(file_list)
-        print file_list
+        # # set up the model with the correct forcing files for this time/duration
+        # file_list = []
+        # i = 0
+        # for i in range(0, len(Time_Map) - 1):
+        #     curr_t, curr_fn = Time_Map[ i ]
+        #     next_t, next_fn = Time_Map[ i+1 ]
+        #     if next_t > start_time:
+        #         file_list.append( curr_fn )
+        #         if next_t > end_time:
+        #             break
+        # file_list.append( next_fn )    # pad the list with next file to cover special case of last file. 
+        #                                 #   awkward. fix later
+        # print 'number of ROMS files :: ', len(file_list)
+        # print file_list
         
-        # set up the model with the correct forcing files for this time/duration
-        file_list_w = []
-        i = 0
-        for i in range(0, len(Time_Map_W) - 1):
-            curr_t, curr_fn = Time_Map_W[ i ]
-            next_t, next_fn = Time_Map_W[ i+1 ]
-            if next_t > start_time:
-                file_list_w.append( curr_fn )
-                if next_t > end_time:
-                    break
-        file_list_w.append( next_fn )    # pad the list with next file to cover special case of last file. 
-                                        #   awkward. fix later
-        print 'number of wind files :: ', len(file_list_w)
-        print file_list_w
+        # # set up the model with the correct forcing files for this time/duration
+        # file_list_w = []
+        # i = 0
+        # for i in range(0, len(Time_Map_W) - 1):
+        #     curr_t, curr_fn = Time_Map_W[ i ]
+        #     next_t, next_fn = Time_Map_W[ i+1 ]
+        #     if next_t > start_time:
+        #         file_list_w.append( curr_fn )
+        #         if next_t > end_time:
+        #             break
+        # file_list_w.append( next_fn )    # pad the list with next file to cover special case of last file. 
+        #                                 #   awkward. fix later
+        # print 'number of wind files :: ', len(file_list_w)
+        # print file_list_w
 
 
         # set up model for this start_time/duration, adding required forcing files
@@ -169,28 +169,45 @@ for Season in setup.StartTimeFiles:
         model.duration = run_time
         model.movers.clear()
 
-        print 'creating curr MFDataset'
-        ds_c = nc4.MFDataset(file_list)
+        # print 'creating curr MFDataset'
+        # ds_c = nc4.MFDataset(file_list)
         
+        # print 'adding a CurrentMover (Trapeziod/RK4):'
+        # g_curr = GridCurrent.from_netCDF(filename=file_list,
+        #                                dataset=ds_c,
+        #                                grid_topology={'node_lon':'lonc','node_lat':'latc'})
+        # c_mover = PyCurrentMover(current=g_curr, default_num_method='Trapezoid')
+        # model.movers += c_mover
+
+        # print 'creating wind MFDataset'
+        # ds_w = nc4.MFDataset(file_list_w)
+
+        # print 'adding a WindMover (Euler):'
+        # g_wind = GridWind.from_netCDF(filename=file_list_w,
+        #                             dataset=ds_w,
+        #                             grid_topology={'node_lon':'lonc','node_lat':'latc'})
+        # w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
+        # model.movers += w_mover
+        
+
+
         print 'adding a CurrentMover (Trapeziod/RK4):'
-        g_curr = GridCurrent.from_netCDF(filename=file_list,
-                                       dataset=ds_c,
-                                       grid_topology={'node_lon':'lonc','node_lat':'latc'})
-        c_mover = PyCurrentMover(current=g_curr, default_num_method='Trapezoid')
+        c_mover = GridCurrentMover(os.path.join(setup.Data_Dir,setup.CurrCatFile),
+                                   os.path.join(setup.Data_Dir,setup.CurrTopoFile),
+                                   num_method='RK4'
+                                   )
         model.movers += c_mover
 
-        print 'creating wind MFDataset'
-        ds_w = nc4.MFDataset(file_list_w)
 
         print 'adding a WindMover (Euler):'
-        g_wind = GridWind.from_netCDF(filename=file_list_w,
-                                    dataset=ds_w,
-                                    grid_topology={'node_lon':'lonc','node_lat':'latc'})
-        w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
+        w_mover = GridWindMover(os.path.join(setup.Data_DirW,setup.WindCatFile),
+                                os.path.join(setup.Data_DirW,setup.WindTopoFile)
+                                )
         model.movers += w_mover
-        
+
         print 'adding a RandomMover:'
         model.movers += RandomMover(diffusion_coef=50000)
+
 
 
 
