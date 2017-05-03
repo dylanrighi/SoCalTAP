@@ -40,14 +40,14 @@ TimeSeries = None
 
 # time span of your data set
 # Test ROMS data files (on laptop)
-DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
-                datetime.datetime(2004, 2, 28, 23)
-                )
+# DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
+                # datetime.datetime(2004, 2, 28, 23)
+                # )
 
 # All ROMS data files (on Gonzo)
-# DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
-                # datetime.datetime(2013, 12, 31, 23)
-                # )
+DataStartEnd = (datetime.datetime(2004, 1, 1, 1),
+                datetime.datetime(2013, 12, 31, 23)
+                )
 
 
 DataGaps = ( )
@@ -73,10 +73,6 @@ WindTopoFile = "wrf_topo_1.3.10.DAT"
 # could do 
 # Seasons = [["All_year", range(1,13) ],
 #               ]
-
-# # example for specifying season
-# Seasons = [["Winter", [11, 12, 1, 2, 3]],
-#          ["Summer",[4, 5, 6, 7, 8, 9, 10]],]
 Seasons = [
           ["AllYear", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
           #["Ice", [12, 1, 2, 3, 4, 5]],
@@ -195,8 +191,8 @@ OutputUserStrings = ["1 day",
 # this is calculated from the OutputTimes
 # TrajectoryRunLength = OutputTimes[-1]
 TrajectoryRunLength = 14 * 24    #hours
-out_delta = 1         # output time interval, in hours
-time_step = 5*60      # model time-step, in seconds
+out_delta = 6         # output time interval, in hours
+time_step = 10*60      # model time-step, in seconds
 
 PresetLOCS = ["5 barrels", "10 barrels", "20 barrels"]
 PresetSpillAmounts = ["1000 barrels", "100 barrels"]
