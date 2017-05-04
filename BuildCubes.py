@@ -106,13 +106,13 @@ if setup.ReceptorType == "Grid":
                 tlist.append(TrajFiles[i])
             TrajFiles = tlist
 
-            # kludge fix to pad length of seasonal traj files to total NumStarts
-            # if len(TrajFiles < setup.NumStarts):
-            if len(TrajFiles) < 500:
-                tlist = TrajFiles[0:250]
-                for i in TrajFiles[0:250]:  
-                    tlist.append(i)
-            TrajFiles = tlist
+            # # kludge fix to pad length of seasonal traj files to total NumStarts
+            # # if len(TrajFiles < setup.NumStarts):
+            # if len(TrajFiles) < 500:
+            #     tlist = TrajFiles[0:250]
+            #     for i in TrajFiles[0:250]:  
+            #         tlist.append(i)
+            # TrajFiles = tlist
 
 
             # make sure they exist
