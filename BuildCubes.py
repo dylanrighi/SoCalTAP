@@ -122,7 +122,7 @@ if setup.ReceptorType == "Grid":
                     raise Exception( "trajectory file missing: %s"%f )
                  
             # print "trajectory files are all there..."
-            print "# of files %s ::" %(str(len(TrajFiles)))
+            print "# of files :: %s" %(str(len(TrajFiles)))
             print "there are %i trajectory files"%len(TrajFiles)
             print "The first 5 are:"
             for name in TrajFiles[:5]:
