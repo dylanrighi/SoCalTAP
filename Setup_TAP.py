@@ -128,12 +128,13 @@ class Grid:
 	pass
 Grid.min_lat = 30.0 # decimal degrees
 Grid.max_lat = 36.0
-Grid.dlat = 0.05       # makes ~5km tall receptor cells I
-# Grid.min_long = 237.0   # -123
-# Grid.max_long = 244.0   # -116 
+# Grid.dlat = 0.05       # makes ~5km tall receptor cells I
+Grid.dlat = 0.02       # makes 2.33km tall receptor cells I
+
 Grid.min_long =  -123.0
 Grid.max_long =  -116.0 
-Grid.dlong = 0.05       # ~5km
+#Grid.dlong = 0.05       # ~5km
+Grid.dlong = 0.025       # 2.41km at 30N, 2.25km at 36N
 
 # Grid.num_lat = 45
 # Grid.num_long = 90
