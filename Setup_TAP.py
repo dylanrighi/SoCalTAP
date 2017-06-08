@@ -74,14 +74,14 @@ WindTopoFile = "wrf_topo_1.3.10.DAT"
 # Seasons = [["All_year", range(1,13) ],
 #               ]
 Seasons = [
-          ["AllYear", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
+          # ["AllYear", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
           #["Ice", [12, 1, 2, 3, 4, 5]],
           #["NoIce",  [6, 7, 8, 9, 10, 11 ]], 
-          # ["Winter", [12, 1, 2, 3, 4, 5]],
+          ["Winter", [12, 1, 2 ]],
           # ["Summer",  [6, 7, 8, 9, 10, 11 ]], 
-          # ["Spring",  [3, 4, 5 ]], 
-          # ["Summer",  [6, 7, 8 ]], 
-          # ["Faller",  [9, 10, 11]],
+          ["Spring",  [3, 4, 5 ]], 
+          ["Summer",  [6, 7, 8 ]], 
+          ["Faller",  [9, 10, 11]],
           ]              
 
 # You don't need to do anything with this
@@ -128,13 +128,13 @@ class Grid:
 	pass
 Grid.min_lat = 30.0 # decimal degrees
 Grid.max_lat = 36.0
-# Grid.dlat = 0.05       # makes ~5km tall receptor cells I
-Grid.dlat = 0.02       # makes 2.33km tall receptor cells I
+# Grid.dlat = 0.05       # makes 5.57 tall receptor cells at 33N I
+Grid.dlat = 0.02         # makes 2.23km tall receptor cells at 33N
 
 Grid.min_long =  -123.0
 Grid.max_long =  -116.0 
-#Grid.dlong = 0.05       # ~5km
-Grid.dlong = 0.025       # 2.41km at 30N, 2.25km at 36N
+#Grid.dlong = 0.05       # 4.67km at 33N
+Grid.dlong = 0.025       # 2.33km at 30N, 2.25km at 36N
 
 # Grid.num_lat = 45
 # Grid.num_long = 90
@@ -148,7 +148,7 @@ TrajectoriesPath = "Trajectories_n" + str(NumLEs) # relative to RootDir
 
 
 CubesPath = "Cubes_n" + str(NumLEs)
-CubesRootNames = ["SoCal_" for i in StartTimeFiles] # built to match the start time files
+CubesRootNames = ["SoCa" for i in StartTimeFiles] # built to match the start time files
 
 CubeStartSitesFilename = os.path.join(RootDir, "SB_sites_all.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
