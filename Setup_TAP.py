@@ -126,13 +126,13 @@ OilWeatheringType = None
 
 class Grid:
 	pass
-Grid.min_lat = 30.0 # decimal degrees
+Grid.min_lat = 32.0 # decimal degrees
 Grid.max_lat = 36.0
 # Grid.dlat = 0.05       # makes 5.57 tall receptor cells at 33N I
 Grid.dlat = 0.02         # makes 2.23km tall receptor cells at 33N
 
-Grid.min_long =  -123.0
-Grid.max_long =  -116.0 
+Grid.min_long =  -122.0
+Grid.max_long =  -116.26
 #Grid.dlong = 0.05       # 4.67km at 33N
 Grid.dlong = 0.025       # 2.33km at 30N, 2.25km at 36N
 
