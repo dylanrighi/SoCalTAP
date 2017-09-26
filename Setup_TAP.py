@@ -74,21 +74,21 @@ WindTopoFile = "wrf_topo_1.3.10.DAT"
 # Seasons = [["All_year", range(1,13) ],
 #               ]
 Seasons = [
-          # ["AllYear", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
+          ["AllYear", [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]],
           #["Ice", [12, 1, 2, 3, 4, 5]],
           #["NoIce",  [6, 7, 8, 9, 10, 11 ]], 
-          ["Winter", [12, 1, 2 ]],
+          # ["Winter", [12, 1, 2 ]],
           # ["Summer",  [6, 7, 8, 9, 10, 11 ]], 
-          ["Spring",  [3, 4, 5 ]], 
-          ["Summer",  [6, 7, 8 ]], 
-          ["Faller",  [9, 10, 11]],
+          # ["Spring",  [3, 4, 5 ]], 
+          # ["Summer",  [6, 7, 8 ]], 
+          # ["Fall",  [9, 10, 11]],
           ]              
 
 # You don't need to do anything with this
 StartTimeFiles = [(os.path.join(RootDir, s[0]+'Starts.txt'), s[0]) for s in Seasons]
 
 # number of start times you want in each season:
-NumStarts = 500
+NumStarts = 200
 #RunStarts = range(0,NumStarts)
 #RunStarts = range(0,50)
 
@@ -118,6 +118,7 @@ NumLEs = 10000
                             
 # we only have "MediumCrude"  in the data for now (see OilWeathering.py)
 OilWeatheringType = None
+OilType = 'AD02297'          # Habitat Platform
 # OilWeatheringType = 'FL_Straits_MediumCrude'  # use None for no weathering -- weathering can be
 #                           # post-processed by the TAP viewer for instantaneous
 #                           # releases
@@ -142,15 +143,15 @@ Grid.num_lat = int(np.ceil(np.abs(Grid.max_lat - Grid.min_lat)/Grid.dlat) + 1)
 Grid.num_long = int(np.ceil(np.abs(Grid.max_long - Grid.min_long)/Grid.dlong) + 1)
 
 
-TrajectoriesPath = "Trajectories_n" + str(NumLEs) # relative to RootDir
+TrajectoriesPath = "Trajectories_Habitat" + str(NumLEs) # relative to RootDir
 # TrajectoriesPath = "Trajectories_n5000" # relative to RootDir
 #TrajectoriesRootname = "FlStr_Traj"
 
 
-CubesPath = "Cubes_n" + str(NumLEs)
+CubesPath = "Cubes_Habitat" + str(NumLEs)
 CubesRootNames = ["SoCa" for i in StartTimeFiles] # built to match the start time files
 
-CubeStartSitesFilename = os.path.join(RootDir, "SB_sites_all.txt")
+CubeStartSitesFilename = os.path.join(RootDir, "sites_Habitat.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
 
 # kludge for iterating runs
@@ -194,7 +195,7 @@ OutputUserStrings = ["1 day",
 # this is calculated from the OutputTimes
 # TrajectoryRunLength = OutputTimes[-1]
 TrajectoryRunLength = 14 * 24    #hours
-out_delta = 6         # output time interval, in hours
+out_delta = 12         # output time interval, in hours
 time_step = 10*60      # model time-step, in seconds
 
 PresetLOCS = ["5 barrels", "10 barrels", "20 barrels"]
@@ -208,4 +209,3 @@ TAPViewerSource = RootDir # where the TAP view, etc lives.
 TAPViewerPath = "TapView_" + str(NumLEs)
 print TAPViewerPath
 # TAPViewerPath = "TapView_n5000"
-
