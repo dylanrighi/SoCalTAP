@@ -21,6 +21,7 @@ from gnome.movers.py_wind_movers import PyWindMover
 from gnome.movers.random_movers import RandomMover
 from gnome.environment import GridCurrent, GridWind, Water
 from gnome.movers import GridCurrentMover, GridWindMover
+from gnome.weatherers import Evaporation, NaturalDispersion
 import gc
 
 #from batch_gnome import batch_gnome
@@ -243,7 +244,7 @@ for Season in setup.StartTimeFiles:
                                              start_position=( start_position[0], start_position[1], 0.0 ),
                                              release_time=start_time,
                                              end_release_time=start_time+release_duration, 
-                                             substance='AD02297'
+                                             substance=setup.OilType
                                              )
 
 
