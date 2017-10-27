@@ -19,7 +19,7 @@ from gnome.map import MapFromBNA
 from gnome.movers.py_current_movers import PyCurrentMover
 from gnome.movers.py_wind_movers import PyWindMover
 from gnome.movers.random_movers import RandomMover
-from gnome.environment import GridCurrent, GridWind, Water
+from gnome.environment import GridCurrent, GridWind, Water, Waves
 from gnome.movers import GridCurrentMover, GridWindMover
 from gnome.weatherers import Evaporation, NaturalDispersion
 import gc
@@ -198,8 +198,9 @@ for Season in setup.StartTimeFiles:
         
         model.environment += g_wind
         water = Water(temperature=290.0,salinity=33.0)
+        waves = Waves(g_wind)
         model.weatherers += Evaporation(water=water,wind=g_wind)
-        model.weatherers += NaturalDispersion()
+        model.weatherers += NaturalDispersion(waves=waves)
 
 
         # print 'adding a CurrentMover (Trapeziod/RK4):'
