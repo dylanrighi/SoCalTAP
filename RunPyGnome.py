@@ -183,7 +183,7 @@ for Season in setup.StartTimeFiles:
         g_curr = GridCurrent.from_netCDF(filename=file_list,
                                        # dataset=ds_c,
                                        grid_topology={'node_lon':'lonc','node_lat':'latc'})
-        c_mover = PyCurrentMover(current=g_curr, default_num_method='Trapezoid')
+        c_mover = PyCurrentMover(current=g_curr, default_num_method='RK4')
         model.movers += c_mover
 
         # print 'creating wind MFDataset'
