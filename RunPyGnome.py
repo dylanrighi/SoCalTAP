@@ -180,11 +180,11 @@ for Season in setup.StartTimeFiles:
         # ds_c = nc4.MFDataset(file_list)
         
         print 'adding a CurrentMover (Trapeziod/RK4):'
-        g_curr = GridCurrent.from_netCDF(filename=file_list,
-                                       # dataset=ds_c,
-                                       grid_topology={'node_lon':'lonc','node_lat':'latc'})
-        c_mover = PyCurrentMover(current=g_curr, default_num_method='RK4')
-        model.movers += c_mover
+        # g_curr = GridCurrent.from_netCDF(filename=file_list,
+        #                                # dataset=ds_c,
+        #                                grid_topology={'node_lon':'lonc','node_lat':'latc'})
+        # c_mover = PyCurrentMover(current=g_curr, default_num_method='RK4')
+        # model.movers += c_mover
 
         # print 'creating wind MFDataset'
         # ds_w = nc4.MFDataset(file_list_w)
@@ -193,8 +193,8 @@ for Season in setup.StartTimeFiles:
         g_wind = GridWind.from_netCDF(filename=file_list_w,
                                     # dataset=ds_w,
                                     grid_topology={'node_lon':'lonc','node_lat':'latc'})
-        # w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
-        # model.movers += w_mover
+        w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
+        model.movers += w_mover
         
         model.environment += g_wind
         water = Water(temperature=290.0,salinity=33.0)
