@@ -190,9 +190,9 @@ for Season in setup.StartTimeFiles:
         # ds_w = nc4.MFDataset(file_list_w)
 
         print 'adding a WindMover (Euler):'
-        # g_wind = GridWind.from_netCDF(filename=file_list_w,
-        #                             # dataset=ds_w,
-        #                             grid_topology={'node_lon':'lonc','node_lat':'latc'})
+        g_wind = GridWind.from_netCDF(filename=file_list_w,
+                                    # dataset=ds_w,
+                                    grid_topology={'node_lon':'lonc','node_lat':'latc'})
         # w_mover = PyWindMover(wind = g_wind, default_num_method='Euler')
         # model.movers += w_mover
         
