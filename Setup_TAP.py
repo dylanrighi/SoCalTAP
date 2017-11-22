@@ -152,7 +152,7 @@ TrajectoriesPath = "Trajectories_Habitat" + str(NumLEs) # relative to RootDir
 CubesPath = "Cubes_Habitat" + str(NumLEs)
 CubesRootNames = ["SoCa" for i in StartTimeFiles] # built to match the start time files
 
-CubeStartSitesFilename = os.path.join(RootDir, "sites_Habitat.txt")
+CubeStartSitesFilename = os.path.join(RootDir, "sites_Habitat_pos.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
 
 # kludge for iterating runs
@@ -169,7 +169,7 @@ CubeStartSites = [x for x in CubeStartSites if x]
 CubeStartFilter = []   # January
 
 MapName = "SoCal TAP"
-MapFileName, MapFileType = (os.path.join('Data','SoCalcoast_big.bna'), "BNA")
+MapFileName, MapFileType = (os.path.join('Data','SoCalcoast_pos.bna'), "BNA")
 
 # days = [1, 3, 5, 7, 10, 15, 20, 30, 50, 70, 90, 120, 180]
 days = [1, 2, 3, 5, 7, 10, 14]
