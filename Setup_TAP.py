@@ -119,10 +119,15 @@ NumLEs = 100
                             
 # we only have "MediumCrude"  in the data for now (see OilWeathering.py)
 OilWeatheringType = None
-OilType = 'AD02297'          # Habitat Platform
+# OilType = 'AD02297'          # Habitat Platform
 # OilWeatheringType = 'FL_Straits_MediumCrude'  # use None for no weathering -- weathering can be
 #                           # post-processed by the TAP viewer for instantaneous
 #                           # releases
+
+# spill amount and units
+SpillAmount = 1000
+SpillUnits = 'bbl'
+
 
 #If ReceptorType is Grid, you need these, it defines the GRID
 

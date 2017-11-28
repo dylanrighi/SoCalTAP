@@ -90,14 +90,22 @@ for fn in flist:
 
 
 
-# load up the start positions
-start_positions = open(os.path.join(setup.RootDir,
-                                    setup.CubeStartSitesFilename)).readlines()
-start_positions = [pos.split(',') for pos in start_positions]
-start_positions = [( float(pos[0]), float(pos[1]) ) for pos in start_positions]
+# load up the start positions and oil types and site names
+tmp =  open(os.path.join(RootDir,CubeStartSitesFilename)).read().splitlines()
+tmp = [pos.split(',') for pos in tmp]
+start_positions = [( float(pos[0]), float(pos[1]) ) for pos in tmp]
 
-# load oil-types for each start site
-# TODO
+if len(tmp[0]) >2:
+    start_OilTypes = [pos[2] for pos in tmp]
+if len(tmp[0]) >3:
+start_SiteNames = [pos[3] for pos in tmp]
+
+
+# start_positions = open(os.path.join(setup.RootDir,
+#                                     setup.CubeStartSitesFilename)).readlines()
+# start_positions = [pos.split(',') for pos in start_positions]
+# start_positions = [( float(pos[0]), float(pos[1]) ) for pos in start_positions]
+
 
 
 # model timing
@@ -226,6 +234,7 @@ for Season in setup.StartTimeFiles:
         # for pos_idx, start_position in enumerate(start_positions):
         for pos_idx in setup.RunSites:
             start_position = start_positions[pos_idx]
+            start_OilType = start_OilTypes[pos_idx]
 
             OutDir = os.path.join(setup.RootDir,setup.TrajectoriesPath,SeasonName,'pos_%03i'%(pos_idx+1))
             make_dir(OutDir)
@@ -245,7 +254,9 @@ for Season in setup.StartTimeFiles:
                                              start_position=( start_position[0], start_position[1], 0.0 ),
                                              release_time=start_time,
                                              end_release_time=start_time+release_duration, 
-                                             substance=setup.OilType
+                                             substance=start_OilType,
+                                             amount=setup.SpillAmount,
+                                             units=setup.SpillUnits,
                                              )
 
 
