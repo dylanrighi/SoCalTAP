@@ -157,7 +157,7 @@ TrajectoriesPath = "Trajectories_" + str(NumLEs) # relative to RootDir
 CubesPath = "Cubes_" + str(NumLEs)
 CubesRootNames = ["SoCa" for i in StartTimeFiles] # built to match the start time files
 
-CubeStartSitesFilename = os.path.join(RootDir, "sites_all_pos.txt")
+CubeStartSitesFilename = os.path.join(RootDir, "sites_all_poslon.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
 
 # kludge for iterating runs
