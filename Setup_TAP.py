@@ -149,15 +149,15 @@ Grid.num_lat = int(np.ceil(np.abs(Grid.max_lat - Grid.min_lat)/Grid.dlat) + 1)
 Grid.num_long = int(np.ceil(np.abs(Grid.max_long - Grid.min_long)/Grid.dlong) + 1)
 
 
-TrajectoriesPath = "Trajectories_Habitat" + str(NumLEs) # relative to RootDir
+TrajectoriesPath = "Trajectories_" + str(NumLEs) # relative to RootDir
 # TrajectoriesPath = "Trajectories_n5000" # relative to RootDir
 #TrajectoriesRootname = "FlStr_Traj"
 
 
-CubesPath = "Cubes_Habitat" + str(NumLEs)
+CubesPath = "Cubes_" + str(NumLEs)
 CubesRootNames = ["SoCa" for i in StartTimeFiles] # built to match the start time files
 
-CubeStartSitesFilename = os.path.join(RootDir, "sites_Habitat_pos.txt")
+CubeStartSitesFilename = os.path.join(RootDir, "sites_all_pos.txt")
 spos = open(os.path.join(RootDir,CubeStartSitesFilename)).readlines()
 
 # kludge for iterating runs
