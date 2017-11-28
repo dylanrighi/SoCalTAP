@@ -104,8 +104,8 @@ RunFiles = []
 
 
 # # Length of release in hours  (0 for instantaneous)
-# ReleaseLength = 14*24   # platforms
-ReleaseLength = 0   # test
+ReleaseLength = 14*24   # platforms
+# ReleaseLength = 0   # test
 
 
 # name of the GNOME SAV file you want to use
@@ -115,7 +115,7 @@ ReleaseLength = 0   # test
 # PyGnome_script = "script_ArcticTAP_orrtap"
 
 # number of Lagrangian elements you want in the GNOME run
-NumLEs = 100
+NumLEs = 5000
                             
 # we only have "MediumCrude"  in the data for now (see OilWeathering.py)
 OilWeatheringType = None
