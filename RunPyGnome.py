@@ -91,7 +91,7 @@ for fn in flist:
 
 
 # load up the start positions and oil types and site names
-tmp =  open(os.path.join(RootDir,CubeStartSitesFilename)).read().splitlines()
+tmp =  open(os.path.join(setup.RootDir,setup.CubeStartSitesFilename)).read().splitlines()
 tmp = [pos.split(',') for pos in tmp]
 start_positions = [( float(pos[0]), float(pos[1]) ) for pos in tmp]
 
