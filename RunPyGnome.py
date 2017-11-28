@@ -98,7 +98,7 @@ start_positions = [( float(pos[0]), float(pos[1]) ) for pos in tmp]
 if len(tmp[0]) >2:
     start_OilTypes = [pos[2] for pos in tmp]
 if len(tmp[0]) >3:
-start_SiteNames = [pos[3] for pos in tmp]
+    start_SiteNames = [pos[3] for pos in tmp]
 
 
 # start_positions = open(os.path.join(setup.RootDir,
