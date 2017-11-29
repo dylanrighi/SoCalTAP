@@ -130,8 +130,10 @@ if setup.ReceptorType == "Grid":
             start = time()
 
             # DDR temp change to limit # of files to NumStarts parameter
-            tmp = TrajFiles[:setup.NumStarts]
-            TrajFiles = tmp
+            tlist= TrajFiles
+            TrajFiles = []
+            for tt in tlist[0:setup.NumStarts]:
+                TrajFiles.append(tlist[tt])
             print "there are %i trajectory files"%len(TrajFiles)
 
 
