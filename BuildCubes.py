@@ -128,7 +128,13 @@ if setup.ReceptorType == "Grid":
             for name in TrajFiles[:5]:
                print name
             start = time()
-            
+
+            # DDR temp change to limit # of files to NumStarts parameter
+            tmp = Trajfiles[:setup.NumStarts]
+            Trajfiles = tmp
+            print "there are %i trajectory files"%len(TrajFiles)
+
+
             if not os.path.isdir(os.path.split(CubeName)[0]):
                 os.mkdir(os.path.split(CubeName)[0])
 
