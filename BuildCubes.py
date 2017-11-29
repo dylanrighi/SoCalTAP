@@ -133,7 +133,7 @@ if setup.ReceptorType == "Grid":
             tlist= TrajFiles
             TrajFiles = []
             for tt in tlist[0:setup.NumStarts]:
-                TrajFiles.append(tlist[tt])
+                TrajFiles.append(tt)
             print "there are %i trajectory files"%len(TrajFiles)
 
 
