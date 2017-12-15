@@ -125,7 +125,7 @@ OilWeatheringType = None
 #                           # releases
 
 # spill amount and units
-SpillAmount = 1000
+SpillAmount = 10000
 SpillUnits = 'bbl'
 
 
